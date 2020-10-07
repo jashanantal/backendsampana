@@ -11,7 +11,8 @@ import { Catalog } from "./entity/catalog";
 const db = new Db();
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false })); 
-app.use( express.static( "public" ) );
+//app.use( express.static( "public" ) );
+app.use('/static', express.static('public'))
 
 app.use(bodyParser.json());
 app.set('view engine', 'ejs');
@@ -35,7 +36,7 @@ app.get('/messages', function (req, res) {
   
 });
 
-app.get('/index', function (req, res) {
+app.get('/song', function (req, res) {
     var id = req.query.id;
     catalogModel.find({ '_id': id.trim() }, function(err, data) {
         // note that data is an array of objects, not a single object!
